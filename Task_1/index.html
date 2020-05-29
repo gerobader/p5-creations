@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generative Gestaltung</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js" integrity="sha256-Pg1di+fBF53Rbh9oZR/FeD1xsFzTLC963lcac1D0ias=" crossorigin="anonymous"></script>
+    <script src="src/sketch.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <div class="controls">
+        <div class="controls-wrapper check">
+            <div class="control">
+                <input type="checkbox" id="single-color" onclick="handleSingleColorControl(this)">
+                <label for="single-color">Single Color Mode</label>
+            </div>
+        </div>
+        <p>After adjusting the Level of Detail for the first time, the Falloff Factor must be adjusted as well, otherwise the image isn't displayed correctly for some reason. It might be a p5 issue.</p>
+        <div class="controls-wrapper input">
+            <div class="control">
+                <label for="lod">Noise Level of Detail:</label>
+                <input type="number" id="lod" min="" max="10" value="1">
+            </div>
+            <div class="control">
+                <label for="lod">Falloff factor:</label>
+                <input type="number" id="falloff" min="0" max="1" value="0.5" step="0.1">
+            </div>
+            <div class="control">
+                <label for="increment">Noise Increment:</label>
+                <input type="number" id="increment" min="0.0001" max="10" value="0.01">
+            </div>
+        </div>
+        <div class="controls-wrapper add-layer">
+            <div class="control">
+                <label for="layer-color">Layer Color:</label>
+                <input type="color" id="layer-color" name="head" value="#e66465">
+            </div>
+            <div class="control">
+                <label for="offset-x">Layer Offset X:</label>
+                <input type="number" id="offset-x" min="0" max="1000" value="10">
+            </div>
+            <div class="control">
+                <label for="offset-y">Layer Offset Y:</label>
+                <input type="number" id="offset-y" min="0" max="1000" value="10">
+            </div>
+            <div class="control">
+                <button type="button" id="add-layer">Add Layer</button>
+            </div>
+        </div>
+        <div class="controls-wrapper">
+            <div class="control">
+                <button type="button" id="create-random">Create Random Layers</button>
+            </div>
+        </div>
+        <div id="display-wrapper"></div>
+    </div>
+    <script>
+      (function () {
+            setupListeners();
+      })();
+    </script>
+</body>
+</html>
