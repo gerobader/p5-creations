@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generative Gestaltung</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js" integrity="sha256-Pg1di+fBF53Rbh9oZR/FeD1xsFzTLC963lcac1D0ias=" crossorigin="anonymous"></script>
+    <script src="timeRect.js"></script>
+    <script src="sketch.js"></script>
+</head>
+<style>
+    body{
+        margin: 0;
+    }
+    #canvas-container{
+        display: flex;
+    }
+    #fps{
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        color: #999;
+    }
+    .flag-container{
+        position: absolute;
+        left: 20px;
+        top: 15px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    img{
+        max-width: 30px;
+        margin-right: 5px;
+    }
+    img:not(.active){
+        opacity: 0.4;
+    }
+    img:hover{
+        cursor: pointer;
+    }
+</style>
+<body>
+    <div id="canvas-container"></div>
+    <div id="fps"></div>
+    <div class="flag-container">
+        <img id="de" class="active" data-time="0" src="assets/germany.svg">
+        <img id="br" data-time="-5" src="assets/brazil.svg">
+        <img id="jp" data-time="7" src="assets/japan.svg">
+    </div>
+    <script>
+      (function () {
+        setupListeners();
+      })();
+    </script>
+</body>
+</html>

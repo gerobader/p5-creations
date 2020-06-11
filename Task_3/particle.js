@@ -1,3 +1,4 @@
+// adapted from shiffman
 function Particle(x, y, mass, initialSize, index, isLoose, targets = undefined) {
   this.pos = createVector(x, y);
   this.vel = createVector(0, 0);
