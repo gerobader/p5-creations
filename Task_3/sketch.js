@@ -11,10 +11,9 @@ let followPointCollection;
 let followParticleCollection;
 
 const animatedText = ['Generative Gestaltung'];
-let singleLetterText = 'Single Letter Animation';
+let singleLetterText = "I'm indestructable! :)";
 const smallLetters = ['i', 'l', 'j', 't', "'", 'I', 'r'];
 const largeLetters = ['m', 'M'];
-
 
 let clickInfo = {text: '(click anywhere in the canvas!)', x: width / 2 - 100, y: height/2 + 50};
 let clickCount = -1;
@@ -94,16 +93,12 @@ function mouseClicked() {
         clickInfo.x = width - 100;
         clickInfo.y = 15;
         break;
-      case 2:
-        singleLetterText = "I'm indestructable! :)";
-        setupFollowers(40, 200, 70);
-        break;
-      case 6:
+      case 4:
         singleLetterText = "Now i'm here!";
         setupFollowers(width - 500, height - 50, 70);
         countClicks = false;
         break;
-      case 7:
+      case 5:
         singleLetterText = "Get me!";
         setupFollowers(10, height - 150, 50);
         evade = true;
@@ -112,6 +107,13 @@ function mouseClicked() {
     }
     if(finale && mouseX > 1177 && mouseY < 148){
       end = true;
+      setTimeout(function () {
+        clickCount = -1;
+        evade = false;
+        end = false;
+        countClicks = true;
+        finale = false;
+      },3000);
     }
   }
 }
