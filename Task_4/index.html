@@ -22,7 +22,7 @@
         position: absolute;
         top: 10px;
         right: 20px;
-        color: #999;
+        color: #fff;
     }
     .flag-container{
         position: absolute;
@@ -39,6 +39,9 @@
         display: flex;
         align-items: center;
         color: #fff;
+    }
+    #time-input{
+        width:60px;
     }
     img{
         max-width: 30px;
@@ -60,9 +63,11 @@
         <img id="jp" data-time="7" src="assets/japan.svg">
     </div>
     <div class="controls">
-        <input id="time-slider" type="range" min="1" max="10000" value="1" onchange="setTimeMultiplicator()">
-        <span id="display">Time x 1</span>
+        <input id="time-slider" type="range" min="1" max="10000" value="1" onchange="(e) => setTimeMultiplicator(e)">
+        <span id="display">Time x </span>
+        <input placeholder="Set Time" id="time-input" type="number" min="1" value="1" onchange="(e) => setTimeMultiplicator(e)">
         <button onclick="resetTime()">reset</button>
+        <button id="fade-out">Enable Fade out</button>
     </div>
     <script>
       (function () {

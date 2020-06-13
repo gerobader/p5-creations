@@ -34,6 +34,11 @@ let lastMinute = 0;
 let currentSecond= 0;
 
 let timeMultiplicator = 1;
+let timeSlider;
+let timeInput;
+let fadeOutButton;
+
+let fadeOutScale = false;
 
 function preload() {
   roboto = loadFont('Roboto-Regular.ttf');
@@ -54,15 +59,14 @@ function setup() {
     actualMinute = minute();
     actualHour = hour();
     calculateTime();
-    console.log(height / 2);
-    sky = new BackgroundRect(0, 0, width, height/2, color(112, 215, 255), color(0, 136, 148), color(25));
-    ground = new BackgroundRect(0, height/2 ,width, height/2, color(13, 191, 0), color(8, 138, 15), color(1, 26, 2));
+    sky = new BackgroundRect(0, 0, width, height/1.5, color(112, 215, 255), color(0, 136, 148), color(25));
+    ground = new BackgroundRect(0, height/1.5 , width, height - height/1.5, color(13, 191, 0), color(8, 138, 15), color(1, 26, 2));
     sun = new CelestialBody(0, color(255, 243, 8), color(235, 66, 9), 17, 6, false);
     sun.constructor();
     moon = new CelestialBody(180, color(199, 10), color(214, 255),18, 5, true);
     moon.constructor();
     for(let i = 0; i < starCount; i++){
-      stars.push(new Star(random(height / 1.2), random(360), 2, random(50, 255)));
+      stars.push(new Star(random(width / 2), random(360), 2, random(50, 255)));
       stars[i].constructor();
     }
     stars.push(new Star(1, 0, 5, 255));
@@ -103,12 +107,6 @@ function draw() {
     dayScale.display();
     nightScale.display();
     ground.display();
-
-    fill(255, 100);
-    strokeWeight(2);
-    textSize(100);
-    stroke(200);
-    text(currentHour, width - 150, 200);
   }
 }
 
@@ -130,7 +128,6 @@ function calculateTime() {
   }
   currentHour = (actualHour + timeOffset + runtimeHours) % 24;
   lastMinute = currentMinute;
-  console.log(currentHour, currentMinute, currentSecond);
 }
 
 function setTimeOffset({target}) {
@@ -142,8 +139,8 @@ function setTimeOffset({target}) {
 
 function resetTime() {
   timeMultiplicator = 1;
-  document.getElementById('display').innerHTML = 'Time x ' +  timeMultiplicator;
-  document.getElementById('time-slider').value = 1;
+  timeSlider.value = 1;
+  timeInput.value = 1;
   offsetCalculated = false;
   milliOffset = 0;
   currentHour = 0;
@@ -167,9 +164,24 @@ function setupListeners(){
   br.addEventListener('click', setTimeOffset);
   const jp = document.getElementById('jp');
   jp.addEventListener('click', setTimeOffset);
+
+  timeSlider = document.getElementById('time-slider');
+  timeSlider.addEventListener('change', (e) => setTimeMultiplicator(e));
+
+  timeInput = document.getElementById('time-input');
+  timeInput.addEventListener('change', (e) => setTimeMultiplicator(e));
+
+  fadeOutButton = document.getElementById('fade-out');
+  fadeOutButton.addEventListener('click', setScaleFade);
 }
 
-function setTimeMultiplicator() {
-  timeMultiplicator = parseInt(document.getElementById('time-slider').value);
-  document.getElementById('display').innerHTML = 'Time x ' +  timeMultiplicator;
+function setScaleFade() {
+  fadeOutScale = !fadeOutScale;
+  fadeOutButton.innerHTML = fadeOutScale ? 'Disable Fade out' : 'Enable Fade out';
+}
+
+function setTimeMultiplicator(e) {
+  timeMultiplicator = parseInt(e.target.value);
+  timeSlider.value = timeMultiplicator;
+  timeInput.value = timeMultiplicator;
 }
