@@ -24,7 +24,7 @@ function setup() {
   fr = createP('');
   window.setInterval(() => {fr.html(floor(frameRate()));}, 500);
   for(let i = 0; i < particleCount; i++) {
-    particles[i] = new Particle(random(width), random(height), 3);
+    particles[i] = new Rocket(random(width), random(height), 3);
   }
   background(255);
 }

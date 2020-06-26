@@ -33,7 +33,7 @@ function setup() {
   background(51);
   const exploPoints = font.textToPoints('explosion!', 400, height / 2, 130);
   for (const p of exploPoints) {
-    exploParticles.push(new Particle(p.x, p.y, 1, 8, 0, false));
+    exploParticles.push(new Rocket(p.x, p.y, 1, 8, 0, false));
   }
   setupFollowers(10, 150, 70);
 }
@@ -160,7 +160,7 @@ function setupFollowers(x, y, fontSize) {
   for(const followLetter of followPointCollection) {
     const particleArray = [];
     for(let i = 0; i < followLetter.length; i++) {
-      particleArray.push(new Particle(followLetter[i].x, followLetter[i].y, 1, 4, i, true, followLetter));
+      particleArray.push(new Rocket(followLetter[i].x, followLetter[i].y, 1, 4, i, true, followLetter));
     }
     followParticleCollection.push(particleArray);
   }

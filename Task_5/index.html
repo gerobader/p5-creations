@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generative Gestaltung</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js" integrity="sha256-Pg1di+fBF53Rbh9oZR/FeD1xsFzTLC963lcac1D0ias=" crossorigin="anonymous"></script>
+    <script src="bigboi.js"></script>
+    <script src="particle.js"></script>
+    <script src="fountain.js"></script>
+    <script src="firework.js"></script>
+    <script src="rocket.js"></script>
+    <script src="sketch.js"></script>
+</head>
+<style>
+    body{
+        margin: 0;
+    }
+    #canvas-container{
+        display: flex;
+    }
+    #message{
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        color: #999;
+        transition: opacity 1000ms ease-in-out;
+    }
+    #message.fade-in{
+        opacity: 1;
+    }
+    #message.fade-out{
+        opacity: 0;
+    }
+    .city{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 1036px;
+        background: url(night_city_cutout.png);
+        z-index: 10;
+    }
+</style>
+<body>
+    <div id="canvas-container"></div>
+    <div id="message" class="fade-in">Please zoom out to around 67% or smaller and reload</div>
+    <div class="city"></div>
+</body>
+<script>
+    window.onload = function() {
+      const message = document.getElementById('message');
+      let inter = setInterval(function () {
+        if (message.classList.contains('fade-in')){
+          message.classList.remove('fade-in');
+          message.classList.add('fade-out');
+        } else {
+          message.classList.add('fade-in');
+          message.classList.remove('fade-out');
+        }
+      }, 1000);
+
+      setTimeout(function () {
+        clearInterval(inter);
+      }, 7000)
+    }
+</script>
+</html>
