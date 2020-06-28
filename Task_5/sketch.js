@@ -41,8 +41,13 @@ function windowResized() {
 }
 
 function bigBoiTimer() {
-  if (timer % 800 === 200){
+  if (timer % 600 === 200){
     bigBois.push(new BigBoi(random(width / 5, 4 * (width / 5)), height - 200));
+    if (random() < 0.3) {
+      setTimeout(function () {
+        bigBois.push(new BigBoi(random(width / 5, 4 * (width / 5)), height - 200));
+      }, random(200, 800));
+    }
   }
   for (let i = bigBois.length - 1; i >= 0; i--) {
     const bigBoi = bigBois[i];

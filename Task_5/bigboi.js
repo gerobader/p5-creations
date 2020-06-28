@@ -15,10 +15,11 @@ function BigBoi(x, y) {
   this.explodeSetup = function () {
     this.exploded = true;
     background(15, 50);
+    const hue = random() < 0.25 ? random(360) : undefined;
     for (let i = 0; i < 30; i++) {
       const thrustDir = p5.Vector.random2D();
       thrustDir.mult(random(1, 15));
-      this.rockets.push(new Rocket(this.pos.x, this.pos.y, thrustDir, random(800, 1500), false));
+      this.rockets.push(new Rocket(this.pos.x, this.pos.y, thrustDir, random(800, 1500), false, hue));
     }
   };
 

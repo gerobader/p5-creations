@@ -8,7 +8,7 @@ function Firework(x, y, interval, minRocketLifetime, maxRocketLifetime) {
 
   this.addFirework = function () {
     const thrust = createVector(random(-0.05, 0.05), random(-0.2, -0.25));
-    this.firework.push(new Rocket(this.pos.x, this.pos.y, thrust, random(this.minRocketLifetime, this.maxRocketLifetime), true));
+    this.firework.push(new Rocket(this.pos.x, this.pos.y, thrust, random(this.minRocketLifetime, this.maxRocketLifetime), true, undefined));
   };
 
   this.update = function () {

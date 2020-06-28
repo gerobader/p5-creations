@@ -1,4 +1,4 @@
-function Rocket(x, y, thrust, flightTime, isPowered) {
+function Rocket(x, y, thrust, flightTime, isPowered, hue) {
   this.pos = createVector(x, y);
   this.isPowered = isPowered;
   if (this.isPowered) {
@@ -13,7 +13,7 @@ function Rocket(x, y, thrust, flightTime, isPowered) {
   this.startTime = millis();
 
   this.explosionParticles = [];
-  this.hue = random(360);
+  this.hue = hue ?? random(360);
 
   this.explode = function () {
     this.isExploded = true;
