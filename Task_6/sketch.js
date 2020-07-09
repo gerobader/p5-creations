@@ -20,7 +20,7 @@ function setup() {
   for (let i = 0; i < 400; i++) {
     flock.push(new Boid());
   }
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 3; i++) {
     predators.push(new Predator());
   }
   boundary = new Rectangle(width / 2, height / 2, width / 2, height / 2);
@@ -124,7 +124,7 @@ function toggleAttractor() {
     for (const boid of flock) {
       boid.alignValue = 2;
       boid.separationValue = 2;
-      boid.attractionValue = 2;
+      boid.attractionValue = 1.6;
       boid.perceptionRadius = 40;
     }
   } else {

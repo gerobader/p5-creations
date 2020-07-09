@@ -9,7 +9,7 @@ class Boid {
         this.perceptionRadius = 40;
         this.alignValue = 2;
         this.separationValue = 2;
-        this.attractionValue = 2;
+        this.attractionValue = 1.6;
     }
 
     flock(qt) {
@@ -80,18 +80,18 @@ class Boid {
     }
 
     avoidEdges() {
-        if (this.pos.x > width - 20) {
-            this.acc.add(createVector(random(-0.5, -1.5), 0));
+        if (this.pos.x > width - 10) {
+            this.acc.add(createVector(random(-0.5, -3.5), 0));
         }
-        if (this.pos.x < 20) {
+        if (this.pos.x < 10) {
             //this.pos.x = width;
-            this.acc.add(createVector(random(0.5, 1.5), 0));
+            this.acc.add(createVector(random(0.5, 3.5), 0));
         }
-        if (this.pos.y > height - 20) {
-            this.acc.add(createVector(0, random(-0.5, -1.5)));
+        if (this.pos.y > height - 10) {
+            this.acc.add(createVector(0, random(-0.5, -3.5)));
         }
-        if (this.pos.y < 20) {
-            this.acc.add(createVector(0, random(0.5, 1.5)));
+        if (this.pos.y < 10) {
+            this.acc.add(createVector(0, random(0.5, 3.5)));
         }
     }
 
