@@ -5,7 +5,6 @@
     <title>Generative Gestaltung</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js" integrity="sha256-Pg1di+fBF53Rbh9oZR/FeD1xsFzTLC963lcac1D0ias=" crossorigin="anonymous"></script>
     <script src="predator.js"></script>
-    <script src="attractor.js"></script>
     <script src="quadTree.js"></script>
     <script src="boid.js"></script>
     <script src="sketch.js"></script>
@@ -13,12 +12,43 @@
 <style>
     body{
         margin: 0;
+        background: #222;
+        color: #fff;
     }
     #canvas-container{
         display: flex;
     }
+    .settings{
+        display: flex;
+        flex-direction: row;
+    }
+    .input{
+        margin-right: 10px;
+    }
 </style>
 <body>
     <div id="canvas-container"></div>
+    <div class="settings">
+        <div class="input">
+            <input type="checkbox" id="qt">
+            <label for="qt">Show Quadtree</label>
+        </div>
+        <div class="input">
+            <input type="checkbox" id="showAttractor">
+            <label for="showAttractor">Show Attractor</label>
+        </div>
+        <div class="input">
+            <input type="checkbox" id="useAttractor" checked>
+            <label for="useAttractor">Use Attractor</label>
+        </div>
+        <div class="input">
+            <input type="checkbox" id="fixedAttractor">
+            <label for="fixedAttractor">Fixed Attractor</label>
+        </div>
+        <div class="input">
+            <input type="checkbox" id="followMouse">
+            <label for="followMouse">Follow Mouse</label>
+        </div>
+    </div>
 </body>
 </html>

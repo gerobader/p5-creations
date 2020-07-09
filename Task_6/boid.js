@@ -6,24 +6,22 @@ class Boid {
         this.acc = createVector();
         this.maxForce = 0.4;
         this.maxSpeed = 7;
-        this.perceptionRadius = 50;
+        this.perceptionRadius = 40;
         this.alignValue = 2;
         this.separationValue = 2;
         this.attractionValue = 2;
     }
 
-    flock(boids, qt) {
-        this.fullBehaviourQT(boids, qt);
+    flock(qt) {
+        this.fullBehaviourQT(qt);
     }
 
-    attraction() {
+    attraction(attractor) {
         const steering = createVector();
-        const attractorPos = createVector(width / 2, height / 2);
-        const direction = p5.Vector.sub(attractorPos, this.pos);
-        // line(this.pos.x, this.pos.y, direction.pos.x, direction.pos.y);
+        const direction = p5.Vector.sub(attractor, this.pos);
         direction.setMag(0.2);
         steering.add(direction);
-        steering.mult(attractionSlider.value());
+        steering.mult(this.attractionValue);
         this.acc.add(steering);
     }
 
@@ -40,7 +38,7 @@ class Boid {
         }
     }
 
-    fullBehaviourQT(boids, qt) {
+    fullBehaviourQT(qt) {
         const align = createVector();
         const cohesion = createVector();
         const separation = createVector();
@@ -74,12 +72,27 @@ class Boid {
             separation.sub(this.vel);
             separation.limit(this.maxForce);
         }
-        align.mult(alignSlider.value());
-        cohesion.mult(cohesionSlider.value());
-        separation.mult(seperationSlider.value());
+        align.mult(this.alignValue);
+        separation.mult(this.separationValue);
         this.acc.add(align);
         this.acc.add(cohesion);
         this.acc.add(separation);
+    }
+
+    avoidEdges() {
+        if (this.pos.x > width - 20) {
+            this.acc.add(createVector(random(-0.5, -1.5), 0));
+        }
+        if (this.pos.x < 20) {
+            //this.pos.x = width;
+            this.acc.add(createVector(random(0.5, 1.5), 0));
+        }
+        if (this.pos.y > height - 20) {
+            this.acc.add(createVector(0, random(-0.5, -1.5)));
+        }
+        if (this.pos.y < 20) {
+            this.acc.add(createVector(0, random(0.5, 1.5)));
+        }
     }
 
     edges() {
@@ -106,12 +119,14 @@ class Boid {
     }
 
     show() {
-        strokeWeight(1);
-        fill(68, 75, 87);
-        stroke(68, 75, 87);
+        fill(11, 63, 74);
+        stroke(11, 63, 74);
         push();
         translate(this.pos.x, this.pos.y);
         rotate(this.vel.heading());
+        strokeWeight(3);
+        line(-7, 0, -13, 0);
+        strokeWeight(1);
         ellipse(0, 0, 15, 5);
         pop();
     }
