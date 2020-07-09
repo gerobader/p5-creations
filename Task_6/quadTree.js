@@ -33,7 +33,7 @@ class QuadTree {
   constructor(boundary, capacity) {
     this.boundary = boundary;
     this.capacity = capacity;
-    this.boids = [];
+    this.elements = [];
     this.divided = false;
   }
 
@@ -52,24 +52,24 @@ class QuadTree {
     this.divided = true;
   }
 
-  insert(boid) {
-    if (!this.boundary.contains(boid)) {
+  insert(element) {
+    if (!this.boundary.contains(element)) {
       return false;
     }
-    if (this.boids.length < this.capacity) {
-      this.boids.push(boid);
+    if (this.elements.length < this.capacity) {
+      this.elements.push(element);
       return true;
     } else {
       if (!this.divided) {
         this.subdivide();
       }
-      if (this.nw.insert(boid)) {
+      if (this.nw.insert(element)) {
         return true;
-      } else if (this.no.insert(boid)) {
+      } else if (this.no.insert(element)) {
         return true;
-      } else if (this.sw.insert(boid)) {
+      } else if (this.sw.insert(element)) {
         return true;
-      } else if (this.so.insert(boid)) {
+      } else if (this.so.insert(element)) {
         return true;
       }
     }
@@ -77,9 +77,9 @@ class QuadTree {
 
   query(range, found = []) {
     if (this.boundary.intersects(range)){
-      for (const boid of this.boids) {
-        if (range.contains(boid)) {
-          found.push(boid);
+      for (const element of this.elements) {
+        if (range.contains(element)) {
+          found.push(element);
         }
       }
       if (this.divided) {
@@ -93,8 +93,9 @@ class QuadTree {
   }
 
   show() {
-    stroke(100);
+    stroke(120);
     strokeWeight(1);
+    noFill();
     rect(this.boundary.x, this.boundary.y, this.boundary.w * 2, this.boundary.h * 2);
     if (this.divided) {
       this.nw.show();
